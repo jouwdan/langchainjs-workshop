@@ -1,7 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { HNSWLib } from 'langchain/vectorstores/hnswlib';
 import { Ollama } from 'langchain/llms/ollama';
 import { PromptTemplate } from 'langchain/prompts';
@@ -14,19 +13,13 @@ export const POST: RequestHandler = async ({ request }) => {
   const formData = await request.formData();
   const pdfFile = formData.get('pdfFile');
   const question = formData.get('question');
-  
-  const loader = new PDFLoader(pdfFile as File);
-  const docs = await loader.load();
-  const splitter = new RecursiveCharacterTextSplitter({
-    chunkOverlap: 0,
-    chunkSize: 500
-  });
-  const splitDocuments = await splitter.splitDocuments(docs);
 
-  const vectorstore = await HNSWLib.fromDocuments(
-    splitDocuments,
-    new HuggingFaceTransformersEmbeddings()
-  );
+  const loader = new PDFLoader(pdfFile as File, {
+    splitPages: false
+  });
+  const docs = await loader.loadAndSplit();
+
+  const vectorstore = await HNSWLib.fromDocuments(docs, new HuggingFaceTransformersEmbeddings());
 
   const retriever = vectorstore.asRetriever();
 
