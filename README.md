@@ -2,6 +2,10 @@
 
 This repository contains the demo code to be able to run a [NodeJS](https://nodejs.org) application that communicates with a locally running [Ollama](https://ollama.ai/) server. It is built using [LangchainJS](https://js.langchain.com/) to communicate with the LLM, along with [SvelteKit](https:/kit.svelte.dev) for the API & frontend.
 
+![image](https://github.com/jouwdan/langchainjs-workshop/assets/76656637/4bc8ac29-3bbf-41f1-a4d8-8f62cbc726dd)
+
+![image](https://github.com/jouwdan/langchainjs-workshop/assets/76656637/335540de-d28a-4723-95ad-68bc01cd9125)
+
 ## Getting Started
 
 In order to get started running this application, you will first need to run Ollama locally. If you have already got it running, skip to the next section.
