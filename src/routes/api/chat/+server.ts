@@ -6,16 +6,13 @@ import { StringOutputParser } from 'langchain/schema/output_parser';
 
 export const POST: RequestHandler = async ({ request }) => {
   const { question } = await request.json();
-  
+
   const model = new Ollama({
     baseUrl: 'http://localhost:11434',
     model: 'llama2'
   });
 
-  const chain = RunnableSequence.from([
-    model,
-    new StringOutputParser()
-  ]);
+  const chain = RunnableSequence.from([model, new StringOutputParser()]);
 
   const response = await chain.invoke(question);
 

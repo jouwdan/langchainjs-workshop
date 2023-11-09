@@ -18,7 +18,7 @@
 
       const response = await fetch('/api/file', {
         method: 'POST',
-        body: formData,
+        body: formData
       });
 
       if (response.ok) {
@@ -69,7 +69,9 @@
   {#if error}
     <p>{error}</p>
   {/if}
-  <div class="border-t border-surface-500/30 bg-surface-800 p-4 fixed bottom-0 w-full h-18 overflow-x-none">
+  <div
+    class="border-t border-surface-500/30 bg-surface-800 p-4 fixed bottom-0 w-full h-18 overflow-x-none"
+  >
     <div class="input-group input-group-divider grid-cols-[auto_1fr_auto] rounded-container-token">
       <input
         class="bg-transparent border-0 ring-0"
@@ -77,7 +79,7 @@
         type="file"
         name="pdfFile"
         accept=".pdf"
-        bind:files={files}
+        bind:files
       />
       <input
         class="bg-transparent border-0 ring-0"
