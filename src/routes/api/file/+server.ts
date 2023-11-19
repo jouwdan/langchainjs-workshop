@@ -17,7 +17,7 @@ export const POST: RequestHandler = async ({ request }) => {
   const loader = new PDFLoader(pdfFile as File, {
     splitPages: false
   });
-  const docs = await loader.loadAndSplit();
+  const docs = await loader.load();
 
   const vectorstore = await HNSWLib.fromDocuments(docs, new HuggingFaceTransformersEmbeddings());
 
