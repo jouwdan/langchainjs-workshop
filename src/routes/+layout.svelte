@@ -7,7 +7,7 @@
 
 <AppShell>
   <svelte:fragment slot="header">
-    <AppBar>NodeBot</AppBar>
+    <AppBar class="font-bold text-xl">NodeBot</AppBar>
   </svelte:fragment>
   <svelte:fragment slot="sidebarLeft">
     <AppRail>
