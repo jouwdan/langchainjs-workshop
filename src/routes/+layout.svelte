@@ -50,7 +50,6 @@
         </svelte:fragment>
         <span>PDF</span>
       </AppRailAnchor>
-      <!-- --- -->
       <svelte:fragment slot="trail">
         <AppRailAnchor
           href="https://github.com/jouwdan/langchainjs-workshop"
