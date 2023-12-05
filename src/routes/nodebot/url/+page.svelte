@@ -39,6 +39,15 @@
 
 <div class="h-full w-full justify-center items-center relative">
   <div class="grid grid-row-[1fr_auto] w-full overflow-y-auto mb-24">
+    {#if conversation.length === 0}
+      <ChatBubble
+        item={{
+          id: 1,
+          text: 'Hi! I am NodeBot. Ask me anything and I will try to answer it.',
+          isQuestion: false
+        }}
+      />
+    {/if}
     {#each conversation as item (item.id)}
       <ChatBubble {item} />
     {/each}
