@@ -51,7 +51,7 @@
     <p>{error}</p>
   {/if}
   <div
-    class="border-t border-surface-500/30 bg-surface-800 p-4 fixed bottom-0 w-full h-18 overflow-x-none"
+    class="border-t border-surface-500/30 bg-surface-800 p-4 fixed bottom-0 w-[-webkit-fill-available] h-18 overflow-x-none"
   >
     <div class="input-group input-group-divider grid-cols-[auto_1fr_auto] rounded-container-token">
       <input
