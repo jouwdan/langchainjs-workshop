@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { ChatBubble } from '$lib/ui';
+
   let url = '';
   let question = '';
   let conversation: { id: number; text: string; isQuestion: boolean }[] = [];
@@ -7,7 +9,6 @@
 
   async function ask() {
     isLoading = true;
-
     const newQuestion = { id: conversation.length + 1, text: question, isQuestion: true };
     conversation = [...conversation, newQuestion];
 
@@ -22,6 +23,7 @@
 
       if (response.ok) {
         const data = await response.json();
+        question = '';
         const newResponse = { id: conversation.length + 1, text: data, isQuestion: false };
         conversation = [...conversation, newResponse];
       } else {
@@ -38,33 +40,11 @@
 <div class="h-full w-full justify-center items-center relative">
   <div class="grid grid-row-[1fr_auto] w-full overflow-y-auto mb-24">
     {#each conversation as item (item.id)}
-      <div
-        class="grid grid-cols-[auto_1fr] gap-2 max-w-2xl {item.isQuestion ? '' : 'ml-auto right-0'}"
-      >
-        <div
-          class="card m-2 p-4 h-auto {item.isQuestion
-            ? 'variant-soft rounded-tl-none'
-            : 'rounded-tr-none'} space-y-2"
-        >
-          <header class="flex justify-between items-center">
-            <p class="font-bold">{item.isQuestion ? 'You' : 'NodeBot'}</p>
-          </header>
-          <p>{item.text}</p>
-        </div>
-      </div>
+      <ChatBubble {item} />
     {/each}
   </div>
   {#if isLoading}
-    <div class="grid grid-row-[1fr_auto] w-full overflow-y-auto mb-24">
-      <div class="grid grid-cols-[auto_1fr] gap-2 max-w-2xl ml-auto right-0">
-        <div class="card m-2 p-4 h-auto variant-soft rounded-tl-none space-y-2">
-          <header class="flex justify-between items-center">
-            <p class="font-bold">NodeBot</p>
-          </header>
-          <p>Typing...</p>
-        </div>
-      </div>
-    </div>
+    <ChatBubble isLoading={true} />
   {/if}
   {#if error}
     <p>{error}</p>
